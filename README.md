@@ -1,7 +1,7 @@
-Ansible Role to Install GNS3 Server
+Ansible Role to Install Cockpit
 =========
 
-Ansible role to install GNS3 Server.
+Ansible role to install Cockpit.
 
 Role Variables
 --------------
