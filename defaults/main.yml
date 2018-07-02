@@ -1,0 +1,9 @@
+cockpit_plugins:
+  - ws
+  - system
+  - packagekit
+  - dashboard
+  - machines
+  - networkmanager
+  - sosreport
+cockpit_plugins_state: "latest"

@@ -1,0 +1,14 @@
+_cockpit_service:
+  state: started
+  name: cockpit.socket
+  enabled: yes
+
+_cockpit_packages:
+  - name:
+      - http://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm
+    state: present
+
+  - name:
+      - cockpit
+    update_cache: yes
+    state: latest
