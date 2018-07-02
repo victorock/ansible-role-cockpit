@@ -1,0 +1,28 @@
+---
+- name: "Ensure state of cockpit_packages"
+  become: true
+  yum:
+    name: "{{ _cockpit_package.name | default(_cockpit_package) }}"
+    state: "{{ _cockpit_package.state | default(omit) }}"
+    update_cache: "{{ _cockpit_package.update_cache | default(omit) }}"
+  loop: "{{ _cockpit_packages }}"
+  loop_control:
+    loop_var: _cockpit_package
+
+- name: "Ensure state of cockpit_plugins"
+  when: cockpit_plugins | length > 0
+  become: true
+  yum:
+    name: "cockpit-{{ _cockpit_plugin.name | default(_cockpit_plugin) }}"
+    state: "{{ _cockpit_plugin.state | default(cockpit_plugins_state) }}"
+    update_cache: "{{ _cockpit_plugin.update_cache | default(omit) }}"
+  loop: "{{ cockpit_plugins }}"
+  loop_control:
+    loop_var: _cockpit_plugin
+
+- name: "Ensure state of service"
+  become: true
+  service:
+    name: "{{ _cockpit_service.name }}"
+    state: "{{ _cockpit_service.state }}"
+    enabled: "{{ _cockpit_service.enabled }}"
